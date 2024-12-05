@@ -1,0 +1,89 @@
+/* CustomerInfo.css */
+
+/* Container for the entire customer info section */
+.customer-info {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+  }
+  
+  /* Heading for the customer info section */
+  .customer-info h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Style for the form, making sure inputs are displayed in a column (vertical) */
+  .customer-info form {
+    display: flex;
+    flex-direction: column; /* Stack the input fields vertically */
+    gap: 15px; /* Add some space between input fields */
+  }
+  
+  /* Style for input fields */
+  .customer-info input {
+    width: 100%; /* Make inputs take up the full width */
+    padding: 10px;
+    margin: 0; /* Remove any default margin from the input */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Change border color on focus */
+  .customer-info input:focus {
+    border-color: #4caf50;
+    outline: none;
+  }
+  
+  /* Placeholder text style */
+  .customer-info input::placeholder {
+    color: #888;
+  }
+  
+  /* Style for the submit button */
+  .customer-info button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Change button color on hover */
+  .customer-info button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Error message style */
+  .customer-info .error {
+    color: red;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Ensure the form elements are not too close to each other */
+  .customer-info input {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the disabled input (email) */
+  .customer-info input[disabled] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+  
