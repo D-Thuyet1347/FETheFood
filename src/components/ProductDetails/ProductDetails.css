@@ -1,6 +1,7 @@
+/* ProductDetails.css */
 .product-details {
   display: flex;
-  flex-wrap: wrap; /* Đảm bảo tương thích với màn hình nhỏ */
+  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
@@ -9,14 +10,14 @@
 
 .product-details-image {
   flex: 1;
-  min-width: 300px; /* Đặt kích thước tối thiểu để ảnh không quá nhỏ */
-  max-width: 50%; /* Giới hạn tối đa không vượt quá nửa màn hình */
+  min-width: 300px;
+  max-width: 50%;
 }
 
 .product-details-image img {
-  width: 100%; /* Ảnh chiếm toàn bộ khung */
-  height: auto; /* Đảm bảo tỷ lệ ảnh */
-  border-radius: 10px; /* Tạo góc bo tròn */
+  width: 100%;
+  height: auto; 
+  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -50,7 +51,7 @@
   margin-top: 10px;
 }
 
-.add-to-cart-btn{
+.add-to-cart-btn {
   padding: 10px 15px;
   background-color: #ff5722;
   color: white;
@@ -61,6 +62,7 @@
   width: 40%;
   transition: background-color 0.3s ease;
 }
+
 .counter-btn {
   padding: 10px 10px;
   background-color: #ff5722;
@@ -118,4 +120,68 @@
   margin-bottom: 15px;
   font-size: 1.5rem;
   color: #333;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .product-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-details-image,
+  .product-details-info {
+    max-width: 100%;
+  }
+
+  .add-to-cart-btn,
+  .counter-btn {
+    width: auto;
+  }
+
+  .product-details-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+  }
+
+  .back-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-details-image {
+    max-width: 100%;
+  }
+
+  .product-details-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .product-price {
+    font-size: 1rem;
+  }
+
+  .add-to-cart-btn,
+  .counter-btn {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+
+  .counter-controls span {
+    font-size: 1rem;
+  }
+
+  .back-btn {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+
+  .product-reviews-section h2 {
+    font-size: 1.2rem;
+  }
 }

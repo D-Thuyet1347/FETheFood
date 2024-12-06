@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CustomerInfo.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 const CustomerInfo = () => {
   const [customerData, setCustomerData] = useState({
@@ -82,13 +83,13 @@ const CustomerInfo = () => {
       // Gửi request cập nhật thông tin
       const response = await axios.put(`http://localhost:4000/api/user/update/${userId}`, customerData);
       if (response.data.success) {
-        alert('Customer information updated successfully!');
+        toast.success('Customer information updated successfully!');
       } else {
-        alert('Failed to update customer information.');
+        toast.error('Failed to update customer information.');
       }
     } catch (err) {
       console.error(err);
-      alert('An error occurred while updating the customer information.');
+      toast.error('An error occurred while updating the customer information.');
     }
   };
 
@@ -105,6 +106,7 @@ const CustomerInfo = () => {
   return (
     <div className="customer-info">
   <h1>Customer Information</h1>
+  <ToastContainer />
   <form onSubmit={handleSubmit}>
     <label>
       First Name:

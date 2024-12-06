@@ -4,14 +4,15 @@ import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart,getTotalCartAmount ,url,addTocart, voucherCode, setVoucherCode} = useContext(StoreContext);
-   const navigate =useNavigate();
-   const [message, setMessage] = useState("");
-   const [voucherDiscount, setVoucherDiscount] = useState(0); // State for voucher discount percentage
-   const [maximumDiscount, setMaximumDiscount] = useState(0); // State for maximum discount
-   const [appliedVoucher, setAppliedVoucher] = useState("");
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url, addTocart, voucherCode, setVoucherCode } = useContext(StoreContext);
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+  const [voucherDiscount, setVoucherDiscount] = useState(0); // State for voucher discount percentage
+  const [maximumDiscount, setMaximumDiscount] = useState(0); // State for maximum discount
+  const [appliedVoucher, setAppliedVoucher] = useState("");
+  const [note, setNote] = useState(""); // State for note
 
-   const handleVoucherSubmit = async () => {
+  const handleVoucherSubmit = async () => {
     try {
       const response = await fetch(`http://localhost:4000/api/vouchers/code/${voucherCode}`);
       if (response.ok) {
@@ -25,8 +26,7 @@ const Cart = () => {
           setMessage(`The order must have a minimum value of ${data.minimumAmount} USD to apply this voucher.`);
         } else if (currentDate < voucherStartDate) {
           setMessage(`This voucher will be valid from ${voucherStartDate.toLocaleDateString()}.`);
-        } 
-        else if (currentDate > voucherEndDate) {
+        } else if (currentDate > voucherEndDate) {
           setMessage("This voucher has expired.");
         } else {
           // Tăng số lượng sử dụng của voucher
@@ -43,8 +43,7 @@ const Cart = () => {
             setAppliedVoucher(voucherCode);
             setVoucherCode("");
             setMessage("Voucher applied successfully!");
-          } 
-          else {
+          } else {
             const updateData = await updateResponse.json();
             setMessage(updateData.message || "Failed to redeem the voucher.");
           }
@@ -72,7 +71,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    navigate('/order', { state: { voucherCode, voucherDiscount, maximumDiscount } });
+    navigate('/order', { state: { voucherCode, voucherDiscount, maximumDiscount, note } });
   };
 
   return (
@@ -84,7 +83,7 @@ const Cart = () => {
           <p>Price</p>
           <p>Quantity</p>
           <p>Total</p>
-          <p>Romove</p>
+          <p>Remove</p>
         </div>
       </div>
       <br />
@@ -93,26 +92,23 @@ const Cart = () => {
         if (cartItems[item._id] > 0) {
           return (
             <div key={item._id}>
-              {" "}
-              
               <div className="cart-items-title cart-items-item">
-                <img src={url+"/images/"+item.image} alt="" />
+                <img src={url + "/images/" + item.image} alt="" />
                 <p>{item.name}</p>
                 <p>${item.price}</p>
-                <div className="quantity">            
-                <p onClick={() => removeFromCart(item._id)} className="cross">
-                  -
-                </p>
-                <p>{cartItems[item._id]}</p>
-                <p onClick={() => addTocart(item._id)} className="cross">
-                  +
-                </p></div>
-    
+                <div className="quantity">
+                  <p onClick={() => removeFromCart(item._id)} className="cross">
+                    -
+                  </p>
+                  <p>{cartItems[item._id]}</p>
+                  <p onClick={() => addTocart(item._id)} className="cross">
+                    +
+                  </p>
+                </div>
                 <p>{item.price * cartItems[item._id]}</p>
                 <p onClick={() => removeFromCart(item._id)} className="cross">
                   x
                 </p>
-
               </div>
               <hr />
             </div>
@@ -131,7 +127,7 @@ const Cart = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount()===0?0:2}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
             </div>
             <hr />
             <div className="cart-total-details">
@@ -142,6 +138,17 @@ const Cart = () => {
             <div className="cart-total-details">
               <b>Total</b>
               <p>${calculateTotal()}</p>
+            </div>
+            <hr />
+            <div className="cart-note">
+              <label htmlFor="note">Add a note to your order:</label>
+              <textarea
+                id="note"
+                name="note"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Enter your note here..."
+              ></textarea>
             </div>
           </div>
           <button onClick={handleCheckout}>PROCESS TO CHECKOUT</button>
@@ -166,4 +173,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Cart;  

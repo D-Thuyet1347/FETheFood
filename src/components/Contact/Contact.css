@@ -1,11 +1,10 @@
 /* ContactIcons.css */
-
 .container {
   position: fixed; /* Fixed position */
   top: 50%; /* Center vertically */
   right: 0; /* Align to the right */
-  transform: translateY(-50%); /* Center align */
-  display: flex; /* Display icons horizontally */
+  transform: translateY(90%); /* Center align */
+  display: inline-block; /* Display icons horizontally */
   flex-direction: column; /* Arrange in a column */
   gap: 10px; /* Space between icons */
   padding: 10px;
@@ -35,4 +34,34 @@
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    top: auto;
+    bottom: 10px;
+    left: 75%;
+    transform: none;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .icon-container {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    bottom: 5px;
+    right: 5px;
+    gap: 8px;
+  }
+
+  .icon-container {
+    width: 35px;
+    height: 35px;
+  }
 }

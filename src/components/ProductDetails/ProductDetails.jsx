@@ -9,21 +9,16 @@ const ProductDetails = () => {
   const { id } = useParams(); 
   const { food_list, url, cartItems, addTocart, removeFromCart, isLoggedIn } = useContext(StoreContext); // Sử dụng StoreContext
   const navigate = useNavigate();
-  const [showLoginPopup, setShowLoginPopup] = useState(false); // State điều khiển hiển thị LoginPopup
-
-  // Tìm sản phẩm dựa trên ID
+  const [showLoginPopup, setShowLoginPopup] = useState(false); 
   const product = food_list.find((item) => item._id === id);
 
-  // Hàm xử lý thêm sản phẩm vào giỏ hàng
   const handleAddToCart = (productId) => {
     if (!isLoggedIn) {
-      setShowLoginPopup(true); // Hiển thị popup đăng nhập nếu chưa đăng nhập
+      setShowLoginPopup(true); 
     } else {
-      addTocart(productId); // Thêm vào giỏ hàng nếu đã đăng nhập
+      addTocart(productId); 
     }
   };
-
-  // Nếu không tìm thấy sản phẩm theo ID
   if (!product) {
     return (
       <div className="product-not-found">

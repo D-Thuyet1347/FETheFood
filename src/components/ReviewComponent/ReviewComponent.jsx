@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './ReviewComponent.css'; // CSS tùy chỉnh
 import LoginPopup from '../LoginPopup/LoginPopup'; // Popup đăng nhập
 import { StoreContext } from '../../context/StoreContext'; // Import StoreContext để lấy trạng thái đăng nhập
+import { toast, ToastContainer } from 'react-toastify';
 
 const ReviewComponent = ({ productId }) => {
   const { isLoggedIn } = useContext(StoreContext); // Lấy thông tin đăng nhập từ StoreContext
@@ -37,7 +38,7 @@ const ReviewComponent = ({ productId }) => {
     }
 
     if (rating < 1 || comment.trim() === '') {
-      alert('Please provide a valid rating and comment.');
+      toast.error('Please provide a valid rating and comment.');
       return;
     }
 
@@ -54,11 +55,11 @@ const ReviewComponent = ({ productId }) => {
         setRating(0);
         setComment('');
       } else {
-        alert('Failed to add review');
+        toast.error('Failed to add review');
       }
     } catch (error) {
       console.error('Error adding review:', error);
-      alert('An error occurred while adding your review.');
+      toast.error('An error occurred while adding your review.');
     }
   };
 
@@ -79,18 +80,18 @@ const ReviewComponent = ({ productId }) => {
       if (data.success) {
         setReviews(reviews.filter((review) => review._id !== reviewId));
       } else {
-        alert('Failed to delete review');
+        toast.error('Failed to delete review');
       }
     } catch (error) {
       console.error('Error deleting review:', error);
-      alert('An error occurred while deleting the review.');
+      toast.error('An error occurred while deleting the review.');
     }
   };
 
   return (
     <div className="review-component">
       <h2>Product Reviews</h2>
-
+      <ToastContainer />
       {/* Form Thêm Đánh Giá */}
       {isLoggedIn && (
         <form onSubmit={handleAddReview} className="review-form">

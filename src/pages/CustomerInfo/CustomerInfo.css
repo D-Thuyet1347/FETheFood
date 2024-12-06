@@ -86,4 +86,9 @@
     background-color: #e9ecef;
     cursor: not-allowed;
   }
-  
+  /* Custom styles for the toast notifications */
+
+.Toastify__close-button.Toastify__close-button--light{
+  color: #000 !important;
+  display: none;
+}
